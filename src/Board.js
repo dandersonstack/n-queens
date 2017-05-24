@@ -79,27 +79,43 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      var sum = _.reduce(this.attributes[rowIndex], function(memo, num){ return memo + num; }, 0);
+      if(sum > 1) {
+        return true;
+      }
+      return false;
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      let conflicts = false;
+      for(let currRow = 0; currRow < this.attributes.n; currRow++) {
+        conflicts = conflicts || this.hasRowConflictAt(currRow);
+      }
+      return conflicts;
     },
-
-
 
     // COLUMNS - run from top to bottom
     // --------------------------------------------------------------
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+      var sum = 0
+      for(let currRow = 0; currRow < this.attributes.n; currRow++) {
+        sum += this.attributes[currRow][colIndex];
+      }
+      if(sum > 1) {
+        return true;
+      } return false;
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return false; // fixme
+      let conflicts = false;
+      for(let currCol = 0; currCol < this.attributes.n; currCol++) {
+        conflicts = conflicts || this.hasColConflictAt(currCol);
+      }
+      return conflicts;
     },
 
 
@@ -109,31 +125,80 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      let sum = 0, currRow, currCol;
+      //checking along the left side first
+      if(majorDiagonalColumnIndexAtFirstRow < 0) {
+        currRow = Math.abs(majorDiagonalColumnIndexAtFirstRow)
+        currCol = 0;
+      } else {
+        currRow = 0;
+        currCol = majorDiagonalColumnIndexAtFirstRow;
+      }
+      while(currRow < this.attributes.n && currCol < this.attributes.n) {
+        sum += this.attributes[currRow][currCol];
+        currRow++; currCol++;
+      }
+      if(sum > 1) {
+        return true;
+      } return false;
     },
 
     // test if any major diagonals on this board contain conflicts
+    //checking every along the left, then along the top
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+      let conflicts = false
+      for(let i = this.attributes.n - 1; i >= 0; i--) {
+        currStart = this._getFirstRowColumnIndexForMajorDiagonalOn(i, 0);
+        conflicts = conflicts || this.hasMajorDiagonalConflictAt(currStart);
+      }
+      for(let i = 1; i < this.attributes.n; i++) {
+        currStart = this._getFirstRowColumnIndexForMajorDiagonalOn(0,i);
+        conflicts = conflicts || this.hasMajorDiagonalConflictAt(currStart);
+      }
+      return conflicts;
     },
-
-
 
     // Minor Diagonals - go from top-right to bottom-left
     // --------------------------------------------------------------
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      let sum = 0, currRow, currCol;
+      console.log(minorDiagonalColumnIndexAtFirstRow);
+      if(minorDiagonalColumnIndexAtFirstRow < 4) {
+        currRow = minorDiagonalColumnIndexAtFirstRow
+        currCol = 0;
+      } else {
+        currRow = this.attributes.n - 1;
+        currCol = minorDiagonalColumnIndexAtFirstRow - currRow;
+      }
+      while(currRow >= 0 && currCol < this.attributes.n) {
+        sum += this.attributes[currRow][currCol];
+        currRow--; currCol++;
+      }
+      if(sum > 1) {
+        return true;
+      } return false;
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      return false; // fixme
+      let conflicts = false
+      //first check the left most row
+      let currStart;
+      for(let i = 0; i < this.attributes.n; i++) {
+        currStart = this._getFirstRowColumnIndexForMinorDiagonalOn(0,i);
+        conflicts = conflicts || this.hasMinorDiagonalConflictAt(currStart);
+      }
+      //then check the bottom row
+      for(let i = 1; i < this.attributes.n; i++) {
+        currStart = this._getFirstRowColumnIndexForMinorDiagonalOn(this.attributes.n-1,i);
+        conflicts = conflicts || this.hasMinorDiagonalConflictAt(currStart);
+      }
+      return conflicts;
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
-
 
   });
 
