@@ -164,7 +164,6 @@
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
       let sum = 0, currRow, currCol;
-      console.log(minorDiagonalColumnIndexAtFirstRow);
       if(minorDiagonalColumnIndexAtFirstRow < 4) {
         currRow = minorDiagonalColumnIndexAtFirstRow
         currCol = 0;
