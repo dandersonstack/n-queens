@@ -196,6 +196,7 @@
       }
       return conflicts;
     },
+
     //returns an array of All possible moves from the current position.
     //for a Board object of size n
     //findKnightMovesFromIndex(0,0) = [[1,2], [2,1]]
@@ -240,6 +241,12 @@
       return results;
     }
   });
+
+//For each move have a helper function to check if it is a legal move
+//Check if conflict free
+//Check if nobody is already in that move
+
+
     /*--------------------  End of Helper Functions  ---------------------*/
 
   var makeEmptyMatrix = function(n) {

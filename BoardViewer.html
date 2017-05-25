@@ -29,6 +29,7 @@
     <script src="src/Board.js"></script>
     <script src="src/BoardView.js"></script>
     <script src="src/solvers.js"></script>
+    <script src="src/decisionTree.js"></script>
     <script>
       // This function uses a board visualizer lets you view an interactive version of any piece matrix.
       window.displayBoard = function(matrix){
@@ -41,13 +42,14 @@
       $(function(){
         // this is a pre-baked solution for n-queens in the n = 4 case, rendered to the screen using our handy visualizer.
         displayBoard([
-          [0, 1, 0, 0],
-          [0, 0, 0, 1],
-          [1, 0, 0, 0],
-          [0, 0, 1, 0]
+          [0, 1, 0, 0, 0],
+          [0, 0, 0, 1, 0],
+          [1, 0, 0, 0, 0],
+          [0, 0, 1, 0, 0],
+          [0, 0, 1, 0, 0]
         ]);
 
-        var n = 4;
+        var n = 5;
         findNRooksSolution(n);
         countNRooksSolutions(n);
         findNQueensSolution(n);
