@@ -15,6 +15,7 @@ DecisionTree.prototype.findKnightMoves = function() {
   let col = this.col;
   let n = this.n;
   let cameFrom = this.cameFrom;
+  console.log(cameFrom || "it is blank");
 
   if(row+2 < n){
     if(col+1 < n){
@@ -46,11 +47,20 @@ DecisionTree.prototype.findKnightMoves = function() {
     }
   }
   //returns all possible KnightMoves except for the one it cameFrom
-  return results.splice(results.indexOf(cameFrom), 1);
+  let index = -1;
+  for(let i in results) {
+    if(JSON.stringify(results[i]) == JSON.stringify(cameFrom)){
+      index=i;
+    }
+  }
+  if(index > -1) {
+    results.splice(index,1);
+  }
+  return results
 };
 
 DecisionTree.prototype.traverseForSolutions = function(currBoard, solutionsObject, queenCount) {
-  debugger;
+  // debugger;
   if(!currBoard.hasAnyQueensConflicts()) {
     //check if the currBoard has any conflicts
     //if it has a conflict than simply return and break out of the recursion

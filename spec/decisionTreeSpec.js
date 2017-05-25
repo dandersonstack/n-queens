@@ -2,7 +2,7 @@ describe('DecisionTree', function() {
   var tree;
 
   beforeEach(function() {
-    tree = new DecisionTree(0, 0, 4, [2,1]);
+    tree = new DecisionTree(0, 0, 4, );
     // debugger;
   });
 
@@ -21,7 +21,7 @@ describe('DecisionTree', function() {
 
     it('should not contain cameFrom in its possibleMoves array', function() {
       let possibleMoves = tree.findKnightMoves();
-      expect(possibleMoves).to.eql( [ [ 1, 2 ] ]);
+      expect(possibleMoves).to.eql( [[2,1] ,[ 1, 2 ] ]);
     });
 
   });

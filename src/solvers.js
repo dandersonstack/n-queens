@@ -47,13 +47,16 @@ window.countNQueensSolutions = function(n) {
   var solutionCount = [0];
   if(n == 0 || n == 1) {
     solutionCount[0] += 1;
-  } else if (n > 3) {
+  }
+  else if (n > 3) {
     let decsionTreeRoots = [];
     let emptyBoard = new Board({n: n});
     decsionTreeRoots.push(new DecisionTree(0,0,n));
     decsionTreeRoots.push(new DecisionTree(0,1,n));
     decsionTreeRoots.push(new DecisionTree(1,0,n));
     decsionTreeRoots.push(new DecisionTree(1,1,n));
+    decsionTreeRoots.push(new DecisionTree(2,0,n));
+    decsionTreeRoots.push(new DecisionTree(0,2,n));
     for(let i in decsionTreeRoots) {
       emptyBoard.togglePiece(decsionTreeRoots[i].row, decsionTreeRoots[i].col);
       decsionTreeRoots[i].traverseForSolutions(emptyBoard, solutionCount, 1);
