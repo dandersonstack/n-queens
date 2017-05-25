@@ -205,40 +205,42 @@
         if(col+1 < this.attributes.n){
           results.push([row+2,col+1]);
         }
-        if(col-1 > this.attributes.n){
+        if(col-1 >= 0){
           results.push([row+2,col-1]);
         }
-      }
-      if(row-2 < this.attributes.n){
-        if(col+1 < this.attributes.n){
-          results.push([row-2,col+1]);
-        }
-        if(col-1 > this.attributes.n){
-          results.push([row-2,col-1]);
-        }
-      }
-      if(row+1 < this.attributes.n){
-        if(col+2 < this.attributes.n){
-          results.push([row+1,col+2]);
-        }
-        if(col-2 > this.attributes.n){
-          results.push([row+1,col-2]);
+
+        if(row+1 < this.attributes.n){
+          if(col+2 < this.attributes.n){
+            results.push([row+1,col+2]);
+          }
+          if(col-2 >= 0){
+            results.push([row+1,col-2]);
+          }
         }
       }
-      if(row-1 < this.attributes.n){
+
+      if(row-1 >= 0){
         if(col+2 < this.attributes.n){
           results.push([row-1,col+2]);
         }
-        if(col-2 > this.attributes.n){
+        if(col-2 >= 0){
           results.push([row-1,col-2]);
         }
+
+        if(row-2 >= 0){
+          if(col+1 < this.attributes.n){
+            results.push([row-2,col+1]);
+          }
+          if(col-1 >= 0){
+            results.push([row-2,col-1]);
+          }
+        }
       }
+
       return results;
     }
-
-    /*--------------------  End of Helper Functions  ---------------------*/
-
   });
+    /*--------------------  End of Helper Functions  ---------------------*/
 
   var makeEmptyMatrix = function(n) {
     return _(_.range(n)).map(function() {
