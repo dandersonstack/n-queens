@@ -35,53 +35,8 @@ window.countNRooksSolutions = function(n) {
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n queens placed such that none of them can attack each other
 window.findNQueensSolution = function(n) {
-  /**
-  1. Write get knight moves from board.
-  2. Check if a move is a legal move.
-  3. Make sure the tests is a legal and kniht moves
-  */
+  //Figure this part out later
 
-  /**
-  1. Implement queue, and move over tests
-  2. Implement pseduo class
-  */
-
-
-  /**
-  0. Create an empty queue, and a starting game board , and a pseduosolutionsList.
-  1. Create a Set of visited pseudo boards.
-  2. Set the current board to the starting game board.
-  3. For every possible starting position, create a pseduo class and add it to the queue
-  4. While there is a pseudo class left to Pop() from the queue, do it and set it to curr.
-    5. Update the current board based on the current pseudo board.
-    6. Get a list of all possible 'knight moves' based on the pseudo moves most prev move
-      8. For each move have a helper function to check if it is a legal move
-        -> Check if conflict free
-        -> Check if nobody is already in that move
-        1. If both conditions are met then create a new pseduo class with that move
-          -> If that pseudo class has not yet been visited than
-            #add to visited
-          -> If that pseudo class is a solution,
-            #then at it to the solutions array
-          -> Otherwise at that psuedo class to the Queue
-  9. When the queue is empty turn all of the pseudo classes into matrices and return that solution array
-  */
-
-
-
-
-  // var stack=new Array();
-  // if(n != 2 || n != 3) {
-  //   let piecesAdded = 0;
-  //   let EmptyBoard = new Board({n: n});
-  //   let boardRows = solution.rows();
-  //   while(piecesAdded < n) {
-  //     piecesAdded++;
-
-  //   }
-  // } else {
-  //   var solution = undefined;
-  // }
   var solution = undefined;
   console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
   return undefined;
@@ -89,9 +44,27 @@ window.findNQueensSolution = function(n) {
 
 // return the number of nxn chessboards that exist, with n queens placed such that none of them can attack each other
 window.countNQueensSolutions = function(n) {
-  var solutionCount = undefined; 
-
+  var solutionCount = [0];
+  if(n == 0 || n == 1) {
+    solutionCount[0] += 1;
+  } else if (n > 3) {
+    let decsionTreeRoots = [];
+    let emptyBoard = new Board({n: n});
+    decsionTreeRoots.push(new DecisionTree(0,0,n));
+    decsionTreeRoots.push(new DecisionTree(0,1,n));
+    decsionTreeRoots.push(new DecisionTree(1,0,n));
+    decsionTreeRoots.push(new DecisionTree(1,1,n));
+    for(let i in decsionTreeRoots) {
+      decsionTreeRoots[i].traverseForSolutions(emptyBoard, solutionCount, 1);
+    }
+  }
   // create new pseudo class for first move to
   console.log('Number of solutions for ' + n + ' queens:', solutionCount);
-  return solutionCount;
+  return solutionCount[0];
 };
+
+
+
+
+
+
