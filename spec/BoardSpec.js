@@ -91,6 +91,7 @@ describe('Board', function() {
 
     beforeEach(function() {
       board = new Board({n:4});
+      boardFive = new Board({n:5});
     });
 
     it('should return an array of 2 elements when called from the top square', function() {
@@ -102,19 +103,23 @@ describe('Board', function() {
     it('should return the correct elements when called from the top square', function() {
       // console.log("This last test passes!");
       let possibleMoves = board.findKnightMovesFromIndex(0,0);
-      expect(possibleMoves).to.eql([[1,2],[2,1]]);
+      expect(possibleMoves).to.eql([[2,1],[1,2]]);
     });
 
-    it('should return the correct elements when called from a square adjacent to the bottom-right', function() {
-      // console.log("This last test passes!");
+    it('should return the correct elements when called from a square adjacent to the bottom-right for n = 4', function() {
       let possibleMoves = board.findKnightMovesFromIndex(3,2);
       expect(possibleMoves.length).to.equal(3);
     });
 
-    it('should return the correct number of elements when called from a square adjacent to the bottom-right', function() {
+    it('should return the correct elements when called from a square adjacent to the bottom-right for n = 5', function() {
+      let possibleMoves = boardFive.findKnightMovesFromIndex(3,2);
+      expect(possibleMoves.length).to.equal(4);
+    });
+
+    it('should return the correct number of elements when called from a specific index', function() {
       // console.log("This last test passes!");
-      let possibleMoves = board.findKnightMovesFromIndex(0,0);
-      expect(possibleMoves).to.eql([[2,0],[1,1],[0,2]]);
+      let possibleMoves = boardFive.findKnightMovesFromIndex(4,3);
+      expect(possibleMoves).to.eql([ [ 3, 1 ], [ 2, 4 ], [ 2, 2 ] ]);
     });
 
   });
