@@ -1,9 +1,9 @@
-var DecisionTree = function(row, col, n){
+var DecisionTree = function(row, col, n, cameFrom=null){
   this.row = row;
   this.col = col;
   this.n = n;
   //this.knightMoves = this.findKnightMovesFromIndex();
-  //this.cameFrom = cameFrom;
+  this.cameFrom = cameFrom;
 };
 
 //returns an array of All possible moves from the current position.
@@ -50,6 +50,7 @@ DecisionTree.prototype.findKnightMoves = function() {
 };
 
 DecisionTree.prototype.traverseForSolutions = function(currBoard, solutionsObject, queenCount) {
+  debugger;
   if(!currBoard.hasAnyQueensConflicts()) {
     //check if the currBoard has any conflicts
     //if it has a conflict than simply return and break out of the recursion
@@ -61,13 +62,13 @@ DecisionTree.prototype.traverseForSolutions = function(currBoard, solutionsObjec
       for(let i in possibleKnightMoves) {
         let currMove = possibleKnightMoves[i];
         //take the first move, and toggle the board based on that move
-        currBoard.toggle(currMove[0], currMove[1]);
+        currBoard.togglePiece(currMove[0], currMove[1]);
          //create a new node, and call traverse on that node with the updated board
-        let decisionTree = new DecisionTree(currMove[0], currMove[1], this.n);
+        let decisionTree = new DecisionTree(currMove[0], currMove[1], this.n, [this.row,this.col]);
         //after you call traverse on that node (it will iterate down the tree)
         decisionTree.traverseForSolutions(currBoard, solutionsObject);
         //untoggle the node and repeat with the rest of the nodes
-        currBoard.toggle(currMove[0], currMove[1]);
+        currBoard.togglePiece(currMove[0], currMove[1]);
       }
     }
   }

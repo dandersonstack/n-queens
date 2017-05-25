@@ -55,7 +55,9 @@ window.countNQueensSolutions = function(n) {
     decsionTreeRoots.push(new DecisionTree(1,0,n));
     decsionTreeRoots.push(new DecisionTree(1,1,n));
     for(let i in decsionTreeRoots) {
+      emptyBoard.togglePiece(decsionTreeRoots[i].row, decsionTreeRoots[i].col);
       decsionTreeRoots[i].traverseForSolutions(emptyBoard, solutionCount, 1);
+      emptyBoard.togglePiece(decsionTreeRoots[i].row, decsionTreeRoots[i].col);
     }
   }
   // create new pseudo class for first move to
