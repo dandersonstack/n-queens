@@ -75,4 +75,48 @@ describe('Board', function() {
       [0, 0, 1, 0]
     ]);
   });
+
+  // describe('The findKnightMovesFromIndex retuns a list of correct possible knight moves', function() {
+  //   beforeEach(function() {
+  //     var board = new Board({n:4});
+  //   });
+  //   it('should return 3 elements when called on ', function{
+  //     console.log("This last test passes!");
+  //     assert(true).to.be(true);
+  //   });
+  // });
+
+  describe('The findKnightMovesFromIndex retuns a list of correct possible knight moves', function() {
+    var board;
+
+    beforeEach(function() {
+      board = new Board({n:4});
+    });
+
+    it('should return an array of 2 elements when called from the top square', function() {
+      // console.log("This last test passes!");
+      let possibleMoves = board.findKnightMovesFromIndex(0,0);
+      expect(possibleMoves.length).to.equal(2);
+    });
+
+    it('should return the correct elements when called from the top square', function() {
+      // console.log("This last test passes!");
+      let possibleMoves = board.findKnightMovesFromIndex(0,0);
+      expect(possibleMoves).to.eql([[1,2],[2,1]]);
+    });
+
+    it('should return the correct elements when called from a square adjacent to the bottom-right', function() {
+      // console.log("This last test passes!");
+      let possibleMoves = board.findKnightMovesFromIndex(3,2);
+      expect(possibleMoves.length).to.equal(3);
+    });
+
+    it('should return the correct number of elements when called from a square adjacent to the bottom-right', function() {
+      // console.log("This last test passes!");
+      let possibleMoves = board.findKnightMovesFromIndex(0,0);
+      expect(possibleMoves).to.eql([[2,0],[1,1],[0,2]]);
+    });
+
+  });
+
 });

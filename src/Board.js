@@ -195,6 +195,45 @@
         conflicts = conflicts || this.hasMinorDiagonalConflictAt(currStart);
       }
       return conflicts;
+    },
+    //returns an array of All possible moves from the current position.
+    //for a Board object of size n
+    //findKnightMovesFromIndex(0,0) = [[1,2], [2,1]]
+    findKnightMovesFromIndex(row, col) {
+      const results = [];
+      if(row+2 < this.attributes.n){
+        if(col+1 < this.attributes.n){
+          results.push([row+2,col+1]);
+        }
+        if(col-1 > this.attributes.n){
+          results.push([row+2,col-1]);
+        }
+      }
+      if(row-2 < this.attributes.n){
+        if(col+1 < this.attributes.n){
+          results.push([row-2,col+1]);
+        }
+        if(col-1 > this.attributes.n){
+          results.push([row-2,col-1]);
+        }
+      }
+      if(row+1 < this.attributes.n){
+        if(col+2 < this.attributes.n){
+          results.push([row+1,col+2]);
+        }
+        if(col-2 > this.attributes.n){
+          results.push([row+1,col-2]);
+        }
+      }
+      if(row-1 < this.attributes.n){
+        if(col+2 < this.attributes.n){
+          results.push([row-1,col+2]);
+        }
+        if(col-2 > this.attributes.n){
+          results.push([row-1,col-2]);
+        }
+      }
+      return results;
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
