@@ -36,7 +36,18 @@ window.countNRooksSolutions = function(n) {
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n queens placed such that none of them can attack each other
 window.findNQueensSolution = function(n) {
   /**
+  1. Write get knight moves from board.
+  2. Check if a move is a legal move.
+  3. Make sure the tests is a legal and kniht moves
+  */
 
+  /**
+  1. Implement queue, and move over tests
+  2. Implement pseduo class
+  */
+
+
+  /**
   0. Create an empty queue, and a starting game board , and a pseduosolutionsList.
   1. Create a Set of visited pseudo boards.
   2. Set the current board to the starting game board.
