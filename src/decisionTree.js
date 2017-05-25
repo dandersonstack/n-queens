@@ -46,8 +46,7 @@ DecisionTree.prototype.findKnightMoves = function() {
     }
   }
   //returns all possible KnightMoves except for the one it cameFrom
-  return results;
-  //.splice(results.indexOf(cameFrom), 1);
+  return results.splice(results.indexOf(cameFrom), 1);
 };
 
 DecisionTree.prototype.traverseForSolutions = function(currBoard, solutionsObject, queenCount) {
