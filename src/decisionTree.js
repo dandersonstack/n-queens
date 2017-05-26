@@ -62,7 +62,10 @@ DecisionTree.prototype.traverseForSolutions = function(currBoard, solutionsObjec
     //check if the currBoard has any conflicts
     //if it has a conflict than simply return and break out of the recursion
     if(queenCount == this.n) {
-      solutionsObject[0]++;
+      for(let i = 0; i < currBoard.rows().length; i++) {
+        console.log(currBoard.rows()[i]);
+      }
+      solutionsObject[0] += 1;
     } else {
       //(DEPTH FIRST SEARCH RECURSIVELY)
       let possibleKnightMoves = this.findKnightMoves();
@@ -73,7 +76,7 @@ DecisionTree.prototype.traverseForSolutions = function(currBoard, solutionsObjec
          //create a new node, and call traverse on that node with the updated board
         let decisionTree = new DecisionTree(currMove[0], currMove[1], this.n, [this.row,this.col]);
         //after you call traverse on that node (it will iterate down the tree)
-        decisionTree.traverseForSolutions(currBoard, solutionsObject, queenCount++);
+        decisionTree.traverseForSolutions(currBoard, solutionsObject, queenCount + 1);
         //untoggle the node and repeat with the rest of the nodes
         currBoard.togglePiece(currMove[0], currMove[1]);
       }
