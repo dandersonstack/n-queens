@@ -15,8 +15,6 @@ DecisionTree.prototype.findKnightMoves = function() {
   let col = this.col;
   let n = this.n;
   let cameFrom = this.cameFrom;
-  console.log(cameFrom || "it is blank");
-
   if(row+2 < n){
     if(col+1 < n){
       results.push([row+2,col+1]);
@@ -24,14 +22,13 @@ DecisionTree.prototype.findKnightMoves = function() {
     if(col-1 >= 0){
       results.push([row+2,col-1]);
     }
-
-    if(row+1 < n){
-      if(col+2 < n){
-        results.push([row+1,col+2]);
-      }
-      if(col-2 >= 0){
-        results.push([row+1,col-2]);
-      }
+  }
+  if(row+1 < n){
+    if(col+2 < n){
+      results.push([row+1,col+2]);
+    }
+    if(col-2 >= 0){
+      results.push([row+1,col-2]);
     }
   }
 
@@ -76,7 +73,7 @@ DecisionTree.prototype.traverseForSolutions = function(currBoard, solutionsObjec
          //create a new node, and call traverse on that node with the updated board
         let decisionTree = new DecisionTree(currMove[0], currMove[1], this.n, [this.row,this.col]);
         //after you call traverse on that node (it will iterate down the tree)
-        decisionTree.traverseForSolutions(currBoard, solutionsObject);
+        decisionTree.traverseForSolutions(currBoard, solutionsObject, queenCount++);
         //untoggle the node and repeat with the rest of the nodes
         currBoard.togglePiece(currMove[0], currMove[1]);
       }
